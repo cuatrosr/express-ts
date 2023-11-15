@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
-import { UserDocument } from "./user.model"; 
 
 export interface GroupInput {
     name: string;
-    users: UserDocument[]; 
+    users: String[]; 
 }
 
 export interface GroupDocument extends GroupInput, mongoose.Document {

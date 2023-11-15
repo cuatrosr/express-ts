@@ -1,25 +1,28 @@
-import mongoose from "mongoose";
+import { UserRole } from "@/enum/userRole.enum";
+import  mongoose from "mongoose";
 
-export interface UserInput {
-  name: string;
-  email: string;
-  password: string;
+export  interface UserInput {
+    name: string;
+    email: string;
+    role: UserRole;
+    groups?: string[];
+    password: string;
+    
 }
 
-export interface UserDocument extends UserInput, mongoose.Document {
-  createdAt: Date;
-  updatedAt: Date;
-  deleteAt?: Date;
+export  interface UserDocument extends UserInput, mongoose.Document {
+    createdAt: Date;
+    updatedAt: Date;
+    deleteAt?: Date;
 }
 
-const userSchema = new mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    email: { type: String, required: true, index: true, unique: true },
-    password: { type: String, required: true },
-  },
-  { timestamps: true, collection: "users" }
-);
+const userSchema = new mongoose.Schema({
+        name: {type: String, required: true},
+        email: {type: String, required: true, index: true, unique: true},
+        role: { type: String, enum: Object.values(UserRole), required: true, default: UserRole.USER },
+        groups: [{ type: mongoose.Schema.Types.ObjectId, ref: "Group" }],
+        password: {type: String, required: true}
+    }, {timestamps: true, collection: "users"});
 
 const User = mongoose.model<UserDocument>("User", userSchema);
 
