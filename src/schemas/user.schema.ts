@@ -10,3 +10,5 @@ export const userSchema = object({
     "Password  must be at least 8 characteres long"
   ),
 });
+
+export type UserSchema = TypeOf<typeof userSchema>;
