@@ -1,7 +1,7 @@
 import express from "express";
-import userController from "@/controllers/user.controller.ts";
-import validateSchema from "@/middleware/validateSchema.ts";
-import { userSchema } from "@/schemas/user.schema.ts";
+import userController from "../../controllers/user.controller";
+import validateSchema from "../../middleware/validateSchema";
+import { userSchema } from "../../schemas/user.schema";
 import passport from "passport";
 
 const router = express.Router();

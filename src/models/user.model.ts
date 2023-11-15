@@ -1,4 +1,4 @@
-import { UserRole } from "@/enum/userRole.enum";
+import { UserRole } from "../enum/userRole.enum";
 import  mongoose from "mongoose";
 
 export  interface UserInput {

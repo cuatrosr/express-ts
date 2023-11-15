@@ -1,7 +1,7 @@
 import express from "express";
-import { db } from "@config/connect";
-import appRouter from "@routes/router.ts";
-import { APP_PORT } from "@core/settings.ts";
+import { db } from "./config/connect";
+import appRouter from "./routes/router";
+import { APP_PORT } from "./core/settings";
 
 const app = express();
 

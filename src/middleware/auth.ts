@@ -1,4 +1,4 @@
-import { JWT_SECRET, JWT_EXPIRATION } from "@core/settings.ts";
+import { JWT_SECRET, JWT_EXPIRATION } from "../core/settings";
 import passportJWT from "passport-jwt";
 import passport from "passport";
 import jwt from "jsonwebtoken";

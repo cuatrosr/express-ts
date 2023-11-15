@@ -7,7 +7,7 @@ const APP_PORT: number = Number(process.env.PORT) || 3000;
 //---
 
 const MONGO_URI: string =
-  process.env.MONGO_URI || "mongodb://localhost:27017/test";
+  process.env.MONGO_URI || "mongodb://127.0.0.1:27017/test";
 
 //---
 

@@ -1,4 +1,4 @@
-import UserModel, { UserInput, UserDocument } from "@/models/user.model";
+import UserModel, { UserInput, UserDocument } from "../models/user.model";
 import jwt from "jsonwebtoken";
 
 class UserService {

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import userService from "@services/user.service";
-import { UserInput, UserDocument } from "@models/user.model";
+import userService from "../services/user.service";
+import { UserInput, UserDocument } from "../models/user.model";
 import bcrypt from "bcrypt";
 
 class UserController {
