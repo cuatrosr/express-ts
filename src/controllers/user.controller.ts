@@ -78,28 +78,6 @@ class UserController {
       res.status(500).json(error);
     }
   }
-
-  public async login(req: Request, res: Response) {
-    try {
-      const user: UserDocument | null = await userService.findByEmail(
-        req.body.email
-      );
-      if (!user) {
-        return res.status(401).json({ message: "Not authorized" });
-      }
-      const isMatch = await bcrypt.compare(req.body.password, user.password);
-
-      if (!isMatch) {
-        return res.status(401).json({ message: "Not authorized" });
-      }
-
-      const token = await userService.generateToken(user);
-
-      return res.status(200).send({ email: user.email, token });
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  }
 }
 
 export default new UserController();
