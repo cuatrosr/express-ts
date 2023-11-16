@@ -2,11 +2,14 @@ import express from "express";
 import { db } from "./config/connect";
 import appRouter from "./routes/router";
 import { APP_PORT } from "./core/settings";
+import passport from "passport";
 
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+app.use(passport.initialize());
+require('./middleware/auth')
 app.use("/ts", appRouter);
 
 db.then(() => {

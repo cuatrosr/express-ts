@@ -23,12 +23,14 @@ passport.use(
 );
 
 async function generateToken(jsonPayload: Record<string, number>, sub: number) {
+  const expiration = new Date();
+  expiration.setDate(expiration.getDate() + JWT_EXPIRATION);
   return jwt.sign(
     {
       ...jsonPayload,
       sub: sub,
       iat: new Date().getTime(),
-      exp: new Date().setDate(new Date().getDate() + JWT_EXPIRATION),
+      exp: expiration.getTime(),
     },
     JWT_SECRET
   );
