@@ -65,7 +65,7 @@ class GroupService {
     if (!group || !user) {
       throw new Error("Group or User not found");
     }
-    if (group.users.includes(idUser)) {
+    if (group.users.includes(user.id)) {
       throw new Error("User in group");
     }
     group?.users.push(idUser);
@@ -84,11 +84,11 @@ class GroupService {
     if (!group || !user) {
       throw new Error("Group or User not found");
     }
-    if (group.users.includes(idUser)) {
+    if (!group.users.includes(idUser)) {
       throw new Error("User not in group");
     }
-    group.users = group.users.filter((user) => user !== idUser);
-    user.groups = user.groups?.filter((group) => group !== idGroup);
+    group.users = group.users.filter((user) => user.toString() !== idUser);
+    user.groups = user.groups?.filter((group) => group.toString() !== idGroup);
     await this.update(idGroup, group);
     await userService.update(idUser, user);
     return group;

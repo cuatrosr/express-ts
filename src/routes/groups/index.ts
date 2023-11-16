@@ -10,7 +10,7 @@ const router = express.Router();
 router.post(
   "/create",
   passport.authenticate("jwt", { session: false }),
-  checkUserRole("superadmin"),
+  checkUserRole(["superadmin"]),
   validateSchema(groupSchema),
   groupController.create
 );
@@ -18,45 +18,49 @@ router.post(
 router.get(
   "/findAll",
   passport.authenticate("jwt", { session: false }),
-  checkUserRole("user"),
+  checkUserRole(["superadmin", "user"]),
   groupController.findAll
 );
 
 router.get(
   "/find/:id",
   passport.authenticate("jwt", { session: false }),
-  checkUserRole("user"),
+  checkUserRole(["superadmin", "user"]),
   groupController.findById
 );
 
 router.put(
   "/update/:id",
   passport.authenticate("jwt", { session: false }),
-  checkUserRole("superadmin"),
+  checkUserRole(["superadmin"]),
   groupController.update
 );
 
 router.delete(
   "/delete/:id",
   passport.authenticate("jwt", { session: false }),
-  checkUserRole("superadmin"),
+  checkUserRole(["superadmin"]),
   groupController.delete
 );
 
 router.patch(
   "/addUser/:idGroup/user/:idUser",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole(["superadmin"]),
   groupController.addUserToAGroup
 );
+
 router.put(
   "/remove/:idGroup/user/:idUser",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole(["superadmin"]),
   groupController.deleteUserToAGroup
 );
 
 router.get(
   "/findGroup/:userId",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole(["superadmin", "user"]),
   groupController.getGroupsByUser
 );
 

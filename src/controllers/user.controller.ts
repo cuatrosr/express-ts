@@ -85,7 +85,7 @@ class UserController {
 
   public async  getUsersByGroup(req: Request, res: Response): Promise<Response>{
     try{
-      const users: UserDocument[] = await userService.getUserByGroup(req.params.groupName);
+      const users: UserDocument[] = await userService.getUserByGroup(req.params.groupId);
       if (!users?.length) {
           return res.status(404).json({ message: "Users not found" });
       }

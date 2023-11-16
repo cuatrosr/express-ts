@@ -23,10 +23,10 @@ passport.use(
 );
 
 const checkUserRole =
-  (requiredRole: string) => (req: any, res: Response, next: NextFunction) => {
+  (requiredRoles: string[]) => (req: any, res: Response, next: NextFunction) => {
     const user : Record<string, string> = req.user;
 
-    if (user && user.role !== requiredRole) {
+    if (user && !requiredRoles.includes(user.role)) {
       return res.status(401).send("Unauthorized");
     }
 
