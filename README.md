@@ -33,11 +33,8 @@ Implements middleware to authorize routes and specific actions, restricting acce
 # Installation
 # Author ✒️
 
-<a href="https://github.com/cuatrosr">
-  <img src="https://avatars.githubusercontent.com/cuatrosr" alt="Foto de perfil de cuatrosr" width="50" height="50">
-</a> <a href="https://github.com/G20-00">
-  <img src="https://github.com/G20-00.png?size=100" alt="Foto de perfil de G20" width="50" height="50">
-</a>
+<a href="https://github.com/cuatrosr"> <img src="https://avatars.githubusercontent.com/cuatrosr" alt="Foto de perfil de cuatrosr" width="50" height="50"></a><a href="https://github.com/G20-00">  <img src="https://github.com/G20-00.png?size=100" alt="Foto de perfil de G20" width="50" height="50"></a>
+
 
 
 
