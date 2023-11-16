@@ -3,6 +3,7 @@ import userController from "../../controllers/user.controller";
 import validateSchema from "../../middleware/validateSchema";
 import { userSchema } from "../../schemas/user.schema";
 import passport from "passport";
+import { checkUserRole } from "../../middleware/auth";
 
 const router = express.Router();
 
@@ -16,6 +17,7 @@ router.post(
 router.get(
   "/findAll",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole,
   userController.findAll
 );
 

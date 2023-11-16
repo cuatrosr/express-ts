@@ -12,6 +12,6 @@ const MONGO_URI: string =
 //---
 
 const JWT_SECRET: string = process.env.JWT_SECRET || "youraccesstokensecret";
-const JWT_EXPIRATION: number = Number(process.env.JWT_EXPIRATION) || 1;
+const JWT_EXPIRATION: number = Number(process.env.JWT_EXPIRATION) || 100;
 
 export { APP_PORT, MONGO_URI, JWT_SECRET, JWT_EXPIRATION };

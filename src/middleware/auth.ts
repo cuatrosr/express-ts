@@ -1,10 +1,12 @@
-import { JWT_SECRET, JWT_EXPIRATION } from "../core/settings";
+import { JWT_SECRET } from "../core/settings";
 import passportJWT from "passport-jwt";
+import passportBearer from "passport-http-bearer";
 import passport from "passport";
-import jwt from "jsonwebtoken";
+import User from "../models/user.model";
 
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
+const BearerStrategy = passportBearer.Strategy;
 
 passport.use(
   new JWTStrategy(
@@ -22,18 +24,21 @@ passport.use(
   )
 );
 
-async function generateToken(jsonPayload: Record<string, number>, sub: number) {
-  const expiration = new Date();
-  expiration.setDate(expiration.getDate() + JWT_EXPIRATION);
-  return jwt.sign(
-    {
-      ...jsonPayload,
-      sub: sub,
-      iat: new Date().getTime(),
-      exp: expiration.getTime(),
-    },
-    JWT_SECRET
-  );
-}
+const checkUserRole = (req: any, res: any, next: any) => {
+  // Assuming user information is stored in req.user after JWT authentication
+  const user = req.user;
+  console.log(user);
 
-export { generateToken };
+  if (user && user.role === "premium") {
+    // User is premium
+    return res.send("User is premium");
+  } else if (user) {
+    // User is not premium
+    return res.send("User is not premium");
+  } else {
+    // Not logged in
+    return res.send("Not logged in");
+  }
+};
+
+export { checkUserRole };

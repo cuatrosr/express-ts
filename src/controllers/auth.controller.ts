@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { UserDocument } from "../models/user.model";
 import userService from "../services/user.service";
 import bcrypt from "bcrypt";
+import { generateToken } from "../utils/jwt.util";
 
 class AuthController {
   public async login(req: Request, res: Response) {
@@ -14,9 +15,10 @@ class AuthController {
         return res.status(401).json({ message: "Not authorized" });
       }
 
-      const token = await userService.generateToken(user!);
+      const payload = { email: user.email };
+      const token = await generateToken(payload, user.id);
 
-      return res.status(200).send({ email: user!.email, token });
+      return res.status(200).send({ email: user.email, token });
     } catch (error) {
       res.status(500).json(error);
     }
