@@ -58,7 +58,7 @@ class UserController {
         req.body.password = await bcrypt.hash(req.body.password, 10);
       }
       const updateUser: UserDocument | null = await userService.update(
-        user,
+        user.id,
         req.body
       );
 

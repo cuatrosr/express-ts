@@ -101,5 +101,13 @@ class GroupService {
       throw error;
     }
   }
+  public async findByName(name: string): Promise<GroupDocument | null> {
+    try{
+        const group = await GroupModel.findOne({name: name});
+        return group;
+    }catch(error){
+        throw error;
+    }
+}
 }
 export default new GroupService();
