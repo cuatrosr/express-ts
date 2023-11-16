@@ -10,6 +10,7 @@ const router = express.Router();
 router.post(
   "/create",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole("superadmin"),
   validateSchema(userSchema),
   userController.create
 );
@@ -17,25 +18,28 @@ router.post(
 router.get(
   "/findAll",
   passport.authenticate("jwt", { session: false }),
-  checkUserRole,
+  checkUserRole("user"),
   userController.findAll
 );
 
 router.get(
   "/find/:id",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole("user"),
   userController.findById
 );
 
 router.put(
   "/update/:id",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole("superadmin"),
   userController.update
 );
 
 router.delete(
   "/delete/:id",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole("superadmin"),
   userController.delete
 );
 

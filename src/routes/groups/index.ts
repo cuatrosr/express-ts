@@ -3,12 +3,14 @@ import groupController from "../../controllers/group.controller";
 import validateSchema from "../../middleware/validateSchema";
 import { groupSchema } from "../../schemas/group.schema";
 import passport from "passport";
+import { checkUserRole } from "../../middleware/auth";
 
 const router = express.Router();
 
 router.post(
   "/create",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole("superadmin"),
   validateSchema(groupSchema),
   groupController.create
 );
@@ -16,24 +18,28 @@ router.post(
 router.get(
   "/findAll",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole("user"),
   groupController.findAll
 );
 
 router.get(
   "/find/:id",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole("user"),
   groupController.findById
 );
 
 router.put(
   "/update/:id",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole("superadmin"),
   groupController.update
 );
 
 router.delete(
   "/delete/:id",
   passport.authenticate("jwt", { session: false }),
+  checkUserRole("superadmin"),
   groupController.delete
 );
 

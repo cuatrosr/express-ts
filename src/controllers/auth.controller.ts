@@ -15,7 +15,7 @@ class AuthController {
         return res.status(401).json({ message: "Not authorized" });
       }
 
-      const payload = { email: user.email };
+      const payload = { email: user.email, role: user.role };
       const token = await generateToken(payload, user.id);
 
       return res.status(200).send({ email: user.email, token });
