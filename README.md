@@ -36,13 +36,13 @@ Have user credentials available for accessing MongoDB.
 ### Installation of Dependencies:
 Open your terminal at the root directory of the project.
 Run the following command to install project dependencies:
-      pnpm install
+      ## pnpm install
 ### Database User Configuration:
 Access your MongoDB instance and create a user that the application will use to access the database.
 
 ### Running the Application:
 Once dependencies are installed and the database is configured, start the application by running:
-      pnpm run dev
+      ## pnpm run dev
 This command initiates the backend application's development server.
 
 # Author ✒️
