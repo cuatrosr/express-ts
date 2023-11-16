@@ -42,5 +42,16 @@ router.delete(
   checkUserRole("superadmin"),
   userController.delete
 );
+router.get(
+"/findEmail/:email",
+passport.authenticate("jwt", { session: false }),
+  userController.findByEmail
+);
+
+router.get(
+  "/findUsersByGroup/:id",
+  passport.authenticate("jwt", { session: false }),
+    userController.getUsersByGroup
+);
 
 export default router;

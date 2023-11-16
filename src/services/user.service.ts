@@ -61,6 +61,7 @@ class UserService {
       throw error;
     }
   }
+  
   public async getUserByGroup(idGroup: string): Promise<UserDocument[]> {
     try {
       const group = await groupService.findById(idGroup);

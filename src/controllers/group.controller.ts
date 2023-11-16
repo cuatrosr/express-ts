@@ -18,6 +18,7 @@ class GroupController {
           return res.status(500).json({ error: error });
         }
       }
+
       public async findAll(req: Request, res: Response): Promise<Response> {
         try {
           const groups: GroupDocument[]= await groupService.findAll();
@@ -26,6 +27,7 @@ class GroupController {
           return res.status(500).json(error);
         }
       }
+
       public async findById(req: Request, res: Response) {
         try {
           const group: GroupDocument | null = await groupService.findById(
@@ -61,6 +63,7 @@ class GroupController {
           res.status(500).json(error);
         }
       }
+
       public async delete(req: Request, res: Response) {
         try {
           const group: GroupDocument | null = await groupService.delete(req.params.id);
@@ -72,7 +75,49 @@ class GroupController {
           res.status(500).json(error);
         }
       }
+
+      public async addUserToAGroup(req: Request, res: Response): Promise<Response> {
+        try {
+          await groupService.addUserToAGroup(req.params.idUser, req.params.idGroup);
+          if (groupService === null) {
+            return res.status(404).json({ message: "User or Group not found" });
+          }
+          return res.status(200).json({ message: "User added to group" });
+        } catch (error) {
+          return res.status(500).json({ error: error });
+        }
+      }
+
+      public async deleteUserToAGroup(req: Request, res: Response): Promise<Response> {
+        try {
+          await groupService.deleteUserToAGroup(req.params.idUser, req.params.idGroup);
+          if (groupService === null) {
+            return res.status(404).json({ message: "User or Group not found" });
+          }
+          return res.status(200).json({ message: "User added to group" });
+        } catch (error) {
+          return res.status(500).json({ error: error });
+        }
+      }
+
+      public async  getGroupsByUser(req: Request, res: Response): Promise<Response>{
+        try{
+          const users: GroupDocument[] = await groupService.getGroupsByUser(req.params.idUser);
+          if (!users?.length) {
+              return res.status(404).json({ message: "Users not found" });
+          }
+            return res.status(200).json(users);
+        }catch(error){
+            return res.status(500).json({error: error});
+        }
+      }
+
     }
+    
+
+
+
+
     
     export default new GroupController();
     

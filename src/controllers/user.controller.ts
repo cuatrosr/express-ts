@@ -26,6 +26,9 @@ class UserController {
   public async findAll(req: Request, res: Response): Promise<Response> {
     try {
       const users: UserDocument[] = await userService.findAll();
+      if (!users?.length) {
+        return res.status(404).json({ message: "Users not found" });
+    }
       return res.status(200).json(users);
     } catch (error) {
       return res.status(500).json(error);
@@ -67,9 +70,36 @@ class UserController {
       res.status(500).json(error);
     }
   }
+
   public async delete(req: Request, res: Response) {
     try {
       const user: UserDocument | null = await userService.delete(req.params.id);
+      if (user === null) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      return res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+
+  public async  getUsersByGroup(req: Request, res: Response): Promise<Response>{
+    try{
+      const users: UserDocument[] = await userService.getUserByGroup(req.params.groupName);
+      if (!users?.length) {
+          return res.status(404).json({ message: "Users not found" });
+      }
+        return res.status(200).json(users);
+    }catch(error){
+        return res.status(500).json({error: error});
+    }
+  }
+
+  public async findByEmail(req: Request, res: Response) {
+    try {
+      const user: UserDocument | null = await userService.findByEmail(
+        req.params.email
+      );
       if (user === null) {
         return res.status(404).json({ message: "User not found" });
       }

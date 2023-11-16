@@ -43,4 +43,21 @@ router.delete(
   groupController.delete
 );
 
+router.patch(
+  "/addUser/:idGroup/user/:idUser",
+  passport.authenticate("jwt", { session: false }),
+  groupController.addUserToAGroup
+);
+router.put(
+  "/remove/:idGroup/user/:idUser",
+  passport.authenticate("jwt", { session: false }),
+  groupController.deleteUserToAGroup
+);
+
+router.get(
+  "/findGroup/:userId",
+  passport.authenticate("jwt", { session: false }),
+  groupController.getGroupsByUser
+);
+
 export default router;

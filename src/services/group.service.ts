@@ -37,6 +37,7 @@ class GroupService {
       throw error;
     }
   }
+
   public async findAll(): Promise<GroupDocument[]> {
     try {
       const groups = await GroupModel.find();
@@ -92,6 +93,7 @@ class GroupService {
     await userService.update(idUser, user);
     return group;
   }
+
   public async getGroupsByUser(idUser: string): Promise<GroupDocument[]> {
     try {
       const user = await userService.findById(idUser);
@@ -101,13 +103,14 @@ class GroupService {
       throw error;
     }
   }
+
   public async findByName(name: string): Promise<GroupDocument | null> {
-    try{
-        const group = await GroupModel.findOne({name: name});
-        return group;
-    }catch(error){
-        throw error;
+    try {
+      const group = await GroupModel.findOne({ name: name });
+      return group;
+    } catch (error) {
+      throw error;
     }
-}
+  }
 }
 export default new GroupService();
