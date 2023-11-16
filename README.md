@@ -25,12 +25,10 @@ Implements middleware to authorize routes and specific actions, restricting acce
   </div>
 
 # Installation
-
 ## Prerequisites
 Make sure you have MongoDB installed and running on your system.
 
 ### Steps
-
 ### MongoDB Configuration:
 Ensure you have an instance of MongoDB running either locally or in the cloud.
 Have user credentials available for accessing MongoDB.
